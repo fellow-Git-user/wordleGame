@@ -7,6 +7,7 @@ const isSpan = document.querySelectorAll("span")
 let clickCount = 0;
 
 
+
 async function getWordOfTheDay () {
     try {
         let response = await fetch (API_URL);
@@ -27,14 +28,11 @@ async function getWordOfTheDay () {
 function keyboardClick (event) {
     if (isLetter(event) && clickCount < 25) {
         isSpan.forEach((element, index) => {
-            console.log(index, element)
             isSpan[clickCount].textContent = event 
-
         })
-
-        // inputDisplay.textContent += event
-        // console.log("🚀 ~ keyboardClick ~ inputDisplay.textContent.length:", inputDisplay.textContent.length)
-        // console.log("veikia", event)
+    } else if (event === 'Backspace' || event === 'Delete') {
+        deleteLetter()
+        console.log('Backspace or Delete')
     } else {
         console.log("SIXTH or Its not a letter")
     }
@@ -44,11 +42,23 @@ function isLetter(letter) {
   return /^[a-zA-Z]$/.test(letter);
 }
 
+function deleteLetter (){
+    isSpan.forEach((element, index) => {
+        isSpan[clickCount - 1].textContent = '';
+    })
+}
+
 function init () {
     inputElement.addEventListener("keydown", function (event) {
         keyboardClick(event.key);
-        clickCount++
-        console.log("🚀 ~ clickCount:", clickCount)
+        if (event.key === "Backspace" || event.key === "Delete") {
+            clickCount--
+            console.log("🚀 ~ clickCount:", clickCount)
+        }  else {
+            clickCount++
+            console.log("🚀 ~ clickCount:", clickCount)
+        }
+        
     })
 }
 
