@@ -9,4 +9,37 @@
     margin-left: auto;
     padding-left: 20px;
     padding-right: 20px;
+    border: 1px solid grey;
+}
+
+h1 {
+    font-size: 72px;
+    font-family: Pacifico;
+    text-align: center;
+}
+
+input {
+    display: block;
+    margin-top: 15px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.word {
+    display: flex;
+    justify-content: center;
+    column-gap: 10px;
+    font-family: Pacifico;
+    text-align: center;
+    font-size: 32px;
+}
+
+.letter{
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    border: 1px solid rgb(196, 166, 129);
+    background-color: #fff;
+    width: 70px;
+    height: 70px;
 }

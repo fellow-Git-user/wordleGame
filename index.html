@@ -4,18 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles/style.css">
 </head>
 <body>
     
     <main>
+        <h1>Wordle fun game</h1>
         <div class="container">
-            <h1>Wordle fun game</h1>
-            <p class="word"><span class="letter"></span><span class="letter"></span><span class="letter"></span><span class="letter"></span><span class="letter"></span></p>
-            <p class="word"><span class="letter"></span><span class="letter"></span><span class="letter"></span><span class="letter"></span><span class="letter"></span></p>
-            <p class="word"><span class="letter"></span><span class="letter"></span><span class="letter"></span><span class="letter"></span><span class="letter"></span></p>
-            <p class="word"><span class="letter"></span><span class="letter"></span><span class="letter"></span><span class="letter"></span><span class="letter"></span></p>
-            <p class="word"><span class="letter"></span><span class="letter"></span><span class="letter"></span><span class="letter"></span><span class="letter"></span></p>
+            <div class="game-container">
+                <input type="text" name="first" id="first" maxlength="5" size="30">
+                <p class="word" id="input-display" class="input-display"><span class="letter">SSS</span><span class="letter"></span><span class="letter"></span><span class="letter"></span><span class="letter"></span></p>
+                <p class="word" id="input-display" class="input-display"><span class="letter"></span><span class="letter"></span><span class="letter"></span><span class="letter"></span><span class="letter"></span></p>
+                <p class="word" id="input-display" class="input-display"><span class="letter"></span><span class="letter"></span><span class="letter"></span><span class="letter"></span><span class="letter"></span></p>
+                <p class="word" id="input-display" class="input-display"><span class="letter"></span><span class="letter"></span><span class="letter"></span><span class="letter"></span><span class="letter"></span></p>
+                <p class="word" id="input-display" class="input-display"><span class="letter"></span><span class="letter"></span><span class="letter"></span><span class="letter"></span><span class="letter"></span></p>
+            </div>
         </div>
     </main>
 
