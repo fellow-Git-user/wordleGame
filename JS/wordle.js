@@ -51,10 +51,10 @@ function deleteLetter (){
 function init () {
     inputElement.addEventListener("keydown", function (event) {
         keyboardClick(event.key);
-        if (event.key === "Backspace" || event.key === "Delete") {
+        if (clickCount !== 0 && (event.key === "Backspace" || event.key === "Delete")) {
             clickCount--
             console.log("🚀 ~ clickCount:", clickCount)
-        }  else {
+        }  else if (clickCount !==  25) {
             clickCount++
             console.log("🚀 ~ clickCount:", clickCount)
         }
