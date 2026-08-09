@@ -25,14 +25,15 @@ async function getWordOfTheDay () {
     }
 }
 
-function keyboardClick (event) {
-    if (isLetter(event) && clickCount < 25) {
-        isSpan.forEach((element, index) => {
-            isSpan[clickCount].textContent = event 
-        })
-    } else if (event === 'Backspace' || event === 'Delete') {
+function keyboardClick (clickedButton) {
+    if (isLetter(clickedButton) && clickCount < 25) {
+        addLetter (clickedButton)
+        clickCount++
+        console.log('Letter Added', clickCount)
+    } else if (clickCount !== 0 && clickedButton === 'Backspace' || clickedButton === 'Delete') {
         deleteLetter()
-        console.log('Backspace or Delete')
+        clickCount--
+        console.log('Backspace or Delete',"click count is " + clickCount)
     } else {
         console.log("SIXTH or Its not a letter")
     }
@@ -42,26 +43,31 @@ function isLetter(letter) {
   return /^[a-zA-Z]$/.test(letter);
 }
 
-function deleteLetter (){
-    isSpan.forEach((element, index) => {
-        isSpan[clickCount - 1].textContent = '';
-    })
+function deleteLetter () {
+    if(clickCount <= 0) {
+        return
+    } else {
+        isSpan.forEach((element, index) => {
+            isSpan[clickCount - 1].textContent = '';
+        })
+    }
+    
+}
+
+function addLetter (clickedButton) {
+    if(clickCount !==  25) {
+        isSpan.forEach((element, index) => {
+            isSpan[clickCount].textContent = clickedButton 
+        })
+    }
 }
 
 function init () {
     inputElement.addEventListener("keydown", function (event) {
         keyboardClick(event.key);
-        if (clickCount !== 0 && (event.key === "Backspace" || event.key === "Delete")) {
-            clickCount--
-            console.log("🚀 ~ clickCount:", clickCount)
-        }  else if (clickCount !==  25) {
-            clickCount++
-            console.log("🚀 ~ clickCount:", clickCount)
-        }
-        
     })
 }
 
-// getWordOfTheDay ()
+getWordOfTheDay ()
 
 init ()
