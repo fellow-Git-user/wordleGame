@@ -18,6 +18,12 @@ h1 {
     text-align: center;
 }
 
+h2 {
+    color: rgb(226, 223, 26);
+    font-size: 0.4em;
+    font-family: monospace;
+}
+
 input {
     display: block;
     margin-top: 15px;
