@@ -11,6 +11,7 @@ async function init() {
     const res = await fetch("https://words.dev-apis.com/word-of-the-day");
     const resObj = await res.json();
     const word = resObj.word.toUpperCase();
+    const wordParts = word.split('')
     setLoading(false)
 
     function addLetter(letter) {
@@ -29,6 +30,27 @@ async function init() {
             //do nothing
             return;
         }
+
+        const guessParts = currentGuess.split('');
+
+        for (let i = 0; i < ANSWER_LENGTH; i++) {
+            // mark as correct
+            if (guessParts[i] === wordParts[i]) {
+                letters[currentRow * ANSWER_LENGTH + i].classList.add('correct');
+            }
+        }
+
+        for (let i = 0; i < ANSWER_LENGTH; i++) {
+            if (guessParts[i] === wordParts[i]) {
+                // do nothing we already did it
+            } else if (wordParts.includes(guessParts[i])/* TO DO make this more accurate */) {
+                letters[currentRow * ANSWER_LENGTH + i].classList.add('close');
+            } else {
+                letters[currentRow * ANSWER_LENGTH + i].classList.add('wrong');
+            }
+        }
+
+
         currentRow++;
         currentGuess = '';
     }
