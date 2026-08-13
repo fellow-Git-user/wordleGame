@@ -32,19 +32,25 @@ async function init() {
         }
 
         const guessParts = currentGuess.split('');
+        const map = makeMap(wordParts);
+        console.log("🚀 ~ commit ~ map:", map)
+        
 
         for (let i = 0; i < ANSWER_LENGTH; i++) {
             // mark as correct
             if (guessParts[i] === wordParts[i]) {
                 letters[currentRow * ANSWER_LENGTH + i].classList.add('correct');
+                map[guessParts[i]]--;
             }
         }
 
         for (let i = 0; i < ANSWER_LENGTH; i++) {
             if (guessParts[i] === wordParts[i]) {
                 // do nothing we already did it
-            } else if (wordParts.includes(guessParts[i])/* TO DO make this more accurate */) {
+            } else if (wordParts.includes(guessParts[i]) && map[guessParts[i]] > 0 ) {
+                //mark as close
                 letters[currentRow * ANSWER_LENGTH + i].classList.add('close');
+                map[guessParts[i]]--;
             } else {
                 letters[currentRow * ANSWER_LENGTH + i].classList.add('wrong');
             }
@@ -83,6 +89,21 @@ function setLoading(isLoading) {
     //if it is loading, it will remove "hidden" class
     //if false  it will add it
     loadingDiv.classList.toggle('hidden', !isLoading)
+}
+
+function makeMap(array) {
+    const obj = {};
+
+    for (let i = 0; i < array.length; i++) {
+        const letter = array[i]
+        if (obj[letter]) {
+            obj[letter]++;
+        } else {
+            obj[letter] = 1;
+        }
+    }
+
+    return obj;
 }
 
 init();
