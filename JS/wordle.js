@@ -35,6 +35,26 @@ async function init() {
             return;
         }
 
+        isLoading = true;
+        setLoading(true);
+
+        const res = await fetch("https://words.dev-apis.com/validate-word", {
+            method: "POST",
+            body: JSON.stringify({ word: currentGuess })
+        });
+
+        const resObj = await res.json();
+        const validWord = resObj.validWord;
+        // const { validWord } = resObj;s
+
+        isLoading = false;
+        setLoading(false)
+
+        if (!validWord) {
+            markInvalidWord()
+            return;
+        }
+
         const guessParts = currentGuess.split('');
         const map = makeMap(wordParts);
         console.log("🚀 ~ commit ~ map:", map)
@@ -64,12 +84,14 @@ async function init() {
         
 
         if (currentGuess === word) {
-            alert('You won!')
             done = true;
-            return
+            setTimeout(() => {
+                alert('You won!')
+            }, 100)
+            return;
         } else if (currentRow === ROUNDS) {
-            alert(`You lose, the word was ${word}`);
             done = true;
+            setTimeout(() => alert(`You lose, the word was ${word}`, 50));
         }
         currentGuess = '';
     }
@@ -77,6 +99,22 @@ async function init() {
     function backspace() {
         currentGuess = currentGuess.substring(0, currentGuess.length - 1);
         letters[ANSWER_LENGTH * currentRow + currentGuess.length].innerText = "";
+    }
+
+    function markInvalidWord() {
+        // alert("not a valid word")
+
+        for (let i = 0; i < ANSWER_LENGTH; i++) {
+            //first remove the class, then wait a few MS to allow
+            //the browser to repaint
+            letters[currentRow * ANSWER_LENGTH + i].classList.remove('invalid')
+            setTimeout(function () {
+                //then add the class back. THis ensures the animation
+                //triggers each time, even if the class
+                // was already present
+                letters[currentRow * ANSWER_LENGTH + i].classList.add('invalid');
+            }, 100)
+        }
     }
 
     document.addEventListener('keydown', function handleKeyPress(event) {
