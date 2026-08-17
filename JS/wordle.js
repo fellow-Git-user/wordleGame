@@ -85,6 +85,7 @@ async function init() {
 
         if (currentGuess === word) {
             done = true;
+            document.querySelector(".brand").classList.add('winner')
             setTimeout(() => {
                 alert('You won!')
             }, 100)
